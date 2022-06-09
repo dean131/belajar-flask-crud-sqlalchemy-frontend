@@ -5,7 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <div class="mb-5">
+<div class="card">
+    <div class="card-body">
         <form method="POST" id="formPost">
             <div class="mb-3">
                 <label for="nama" class="form-label">Nama</label>
@@ -43,65 +44,70 @@
             <button type="submit" id="btnSubmit" class="btn btn-success">Post</button>
         </form>
     </div>
-    
-    <button type="button" id="btnTampil" class="btn btn-primary">Tampil</button>
-    <div id="wadah"></div>
+</div>
+
+<div class="mb-md-3"></div>
+
+<div class="card">
+    <div class="card-body col-md" id="wadah"></div>
+</div>
 {% endblock %}
 
 {% block script %}
-    <script>
-        $(document).ready(function() {
+<script>
+    $(document).ready(function() {
 
-            $("#btnTampil").click(function(event) {
-                $.ajax({
-                    url: "https://belajar-flask-crud-sqlalchemy.herokuapp.com/users",
-                    type: "GET",
-                    dataType: "json",
-                    success: function(data) {
-                        let table = `<table class="table table-striped">
-                                    <thead> 
-                                        <tr>
-                                            <th scope="col">ID</th>
-                                            <th >Nama</th>
-                                            <th >Email</th>
-                                            <th >Password</th>
-                                            <th >Alamat</th>
-                                            <th >J-Kelamin</th>
-                                            <th >No Telp</th>
-                                            <th >Dibuat</th>
-                                        </tr> 
-                                    </thead> 
-                                    <tbody> `;
-                        $.each(data.values, function() {
-                            table += `<tr><td>${this["id"]}</td>`;
-                            table += `<td>${this["nama"]}</td>`;
-                            table += `<td>${this["email"]}</td>`;
-                            table += `<td>${this["password"]}</td>`;
-                            table += `<td>${this["alamat"]}</td>`;
-                            table += `<td>${this["j_kelamin"]}</td>`;
-                            table += `<td>${this["no_telp"]}</td>`;
-                            table += `<td>${this["dibuat"]}</td></tr>`;
-                        });
+        tampil();
 
-                        table += '</tbody> </table>';
-
-                        $("#wadah").html(table)
-                    }
-                });
+        function tampil() {
+            $.ajax({
+                url: "https://belajar-flask-crud-sqlalchemy.herokuapp.com/users",
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    let table = `<table class="table table-striped">
+                                <thead> 
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th >Nama</th>
+                                        <th >Email</th>
+                                        <th >Password</th>
+                                        <th >Alamat</th>
+                                        <th >J-Kelamin</th>
+                                        <th >No Telp</th>
+                                        <th >Dibuat</th>
+                                    </tr> 
+                                </thead> 
+                                <tbody> `;
+                    $.each(data.values, function() {
+                        table += `<tr><td>${this["id"]}</td>`;
+                        table += `<td>${this["nama"]}</td>`;
+                        table += `<td>${this["email"]}</td>`;
+                        table += `<td>${this["password"]}</td>`;
+                        table += `<td>${this["alamat"]}</td>`;
+                        table += `<td>${this["j_kelamin"]}</td>`;
+                        table += `<td>${this["no_telp"]}</td>`;
+                        table += `<td>${this["dibuat"]}</td></tr>`;
+                    });
+                    table += '</tbody> </table>';
+                    $("#wadah").html(table)
+                }
             });
-            
-            $('#formPost').submit(function(event) {
-                event.preventDefault();
-                $.ajax({
-                    type: 'POST',
-                    url: "https://belajar-flask-crud-sqlalchemy.herokuapp.com/users",
-                    data: $(this).serialize(),
-                    success: function() {
-                        alert('succes post data');
-                    }
-                });
+        }
+
+        $('#formPost').submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: "https://belajar-flask-crud-sqlalchemy.herokuapp.com/users",
+                data: $(this).serialize(),
+                success: function() {
+                    alert('succes post data');
+                    tampil();
+                }
             });
         });
-    </script>
+    });
+</script>
 
 {% endblock %}
