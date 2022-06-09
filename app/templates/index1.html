@@ -42,7 +42,9 @@
                                     <tbody> `;
 
                         $.each(data, function(index, val) {
-                            table += ' <tr><td>'+val["values"]["alamat"]+'</td> <td>'+val.nama+'</td> <td>'+val+'</td> <td>'+val+'</td> <td>'+val+'</td> <td>'+val+'</td> <td>'+val+'</td> <td>'+val+'</td> </tr>';
+                            console.log("ini val "+val)
+                            console.log("ini index "+index)
+                            table += ' <tr><td>'+val+'</td> <td>'+val+'</td> <td>'+val+'</td> <td>'+val+'</td> <td>'+val+'</td> <td>'+val+'</td> <td>'+val+'</td> <td>'+val+'</td> </tr>';
                         });
 
                         table += '</tbody> </table>';
