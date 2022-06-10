@@ -46,8 +46,6 @@
     </div>
 </div>
 
-<button type="button" id="btnTampil" class="btn-primary">Tampil</button>
-
 <div class="col-md-auto" id="wadah"></div>
 <!-- <div class="card col-md-auto">
     <div class="card-body col-md-auto">
@@ -60,10 +58,6 @@
     $(document).ready(function() {
 
         tampil();
-
-        $("#btnTampil").click(function(event) {
-            tampil();
-        });
 
         function tampil() {
             $.ajax({
