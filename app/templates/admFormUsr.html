@@ -60,18 +60,16 @@
     const myAlert = document.getElementById('alert_berhasil');
     myAlert.style.display = 'none';
 
-    $(document).ready(function(event) {
-        $('#formPost').submit(function(event) {
-            event.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: "https://belajar-flask-crud-sqlalchemy.herokuapp.com/users",
-                data: $(this).serialize(),
-                success: function() {
-                    console.log('sukses');
-                    myAlert.style.display = 'block';
-                }
-            });
+    $('#formPost').submit(function(event) {
+        event.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "https://belajar-flask-crud-sqlalchemy.herokuapp.com/users",
+            data: $(this).serialize(),
+            success: function() {
+                console.log('sukses');
+                myAlert.style.display = 'block';
+            }
         });
     });
     
