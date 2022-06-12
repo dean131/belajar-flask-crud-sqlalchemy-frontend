@@ -6,14 +6,11 @@
 
 
 {% block body %}
-<div class="container col-md-10">
+<div class="container col-md-8">
     <div class="card">
         <div class="card-body">
             <h2 class="card-title text-center">INPUT USER</h2>
-            <div class="alert alert-success alert-dismissible" id="alert_berhasil" role="alert">
-                Berhasil menyimpan data
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+            <div id="myAlert"></div>
             <form method="POST"  id="formPost">
                 <div class="mb-3">
                     <label for="nama" class="form-label">Nama</label>
@@ -48,18 +45,19 @@
                     <label for="no_telp" class="form-label"></label>
                     <input type="text" class="form-control" name="no_telp" id="no_telp">
                 </div>
-                <button type="submit" id="btnSubmit" class="btn btn-success">Post</button>
+                <button type="submit" id="btnSubmit" class="btn btn-success col-2">Post</button>
             </form>
         </div>
     </div>
 </div>
+
+<div class="col-md-2"></div>
 {% endblock %}
 
 {% block script %}
 <script>
-    const myAlert = document.getElementById('alert_berhasil');
-    myAlert.style.display = 'none';
 
+    // Ajax post
     $('#formPost').submit(function(event) {
         event.preventDefault();
         $.ajax({
@@ -68,10 +66,25 @@
             data: $(this).serialize(),
             success: function() {
                 console.log('sukses');
-                myAlert.style.display = 'block';
+                alert('Data berhasil disimpan!', 'success')
             }
         });
     });
     
+    // Alert
+    const alertPlaceholder = document.getElementById('myAlert')
+
+    const alert = (message, type) => {
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML = [
+        `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+        `   <div>${message}</div>`,
+        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+        '</div>'
+    ].join('')
+
+    alertPlaceholder.append(wrapper)
+    }
+
 </script>
 {% endblock %}

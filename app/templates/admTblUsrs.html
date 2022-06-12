@@ -9,7 +9,7 @@
     <div class="card">
         <div class="card-body">
             <h2 class="text-center">Data User</h2>
-            <div class="table-responsive" id="wadah"></div>
+            <div class="table-responsive" id="wadah" style="height: 900px;"></div>
         </div>
     </div>
 </div>
@@ -18,46 +18,56 @@
 {% block script %}
 <script>
 
-    $(document).ready(function() {
+    tampil();
 
-        tampil();
-
-        function tampil() {
-            $.ajax({
-                url: "https://belajar-flask-crud-sqlalchemy.herokuapp.com/users",
-                type: "GET",
-                dataType: "json",
-                success: function(data) {
-                    let table = `<table class="table table-striped">
-                                <thead> 
-                                    <tr>
-                                        <th scope="col">ID</th>
-                                        <th >Nama</th>
-                                        <th >Email</th>
-                                        <th >Password</th>
-                                        <th >Alamat</th>
-                                        <th >J-Kelamin</th>
-                                        <th >No Telp</th>
-                                        <th >Dibuat</th>
-                                    </tr> 
-                                </thead> 
-                                <tbody> `;
-                    $.each(data.values, function() {
-                        table += `<tr><td>${this["id"]}</td>`;
-                        table += `<td>${this["nama"]}</td>`;
-                        table += `<td>${this["email"]}</td>`;
-                        table += `<td>${this["password"]}</td>`;
-                        table += `<td>${this["alamat"]}</td>`;
-                        table += `<td>${this["j_kelamin"]}</td>`;
-                        table += `<td>${this["no_telp"]}</td>`;
-                        table += `<td>${this["dibuat"]}</td></tr>`;
-                    });
-                    table += '</tbody> </table>';
-                    $("#wadah").html(table)
-                }
-            });
-        }
-    });
+    // Ajax get
+    function tampil() {
+        $.ajax({
+            url: "https://belajar-flask-crud-sqlalchemy.herokuapp.com/users",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                let table = `<table class="table table-striped">
+                            <thead class="sticky-top bg-secondary text-white"> 
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Password</th>
+                                    <th>Alamat</th>
+                                    <th>J-Kelamin</th>
+                                    <th>No Telp</th>
+                                    <th>Dibuat</th>
+                                    <th>Aksi</th>
+                                </tr> 
+                            </thead> 
+                            <tbody> `;
+                $.each(data.values, function() {
+                    table += `<tr><td scope="col">${this["id"]}</td>`;
+                    table += `<td>${this["nama"]}</td>`;
+                    table += `<td>${this["email"]}</td>`;
+                    table += `<td>${this["password"]}</td>`;
+                    table += `<td>${this["alamat"]}</td>`;
+                    table += `<td>${this["j_kelamin"]}</td>`;
+                    table += `<td>${this["no_telp"]}</td>`;
+                    table += `<td>${this["dibuat"]}</td>`;
+                    table += `<td><button type="button" class="btn btn-danger" onclick="hapusUser(${this["id"]})">Hapus</button></td></tr>`;
+                });
+                table += '</tbody> </table>';
+                $("#wadah").html(table)
+            }
+        });
+    }
+    
+    function hapusUser(id) {
+        $.ajax({
+            url: `https://belajar-flask-crud-sqlalchemy.herokuapp.com/users/${id}`,
+            type: "DELETE",
+            success: function() {
+                tampil();
+            }
+        });
+    }
 </script>
 
 {% endblock %}
