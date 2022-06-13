@@ -1,9 +1,12 @@
 from app import app
-from flask import render_template
+from flask import render_template, session
 
 @app.route('/')
+@app.route('/index')
 def f_index():
-    return render_template('home.html')
+    # if session['email'] not in session:
+    #     return render_template('login.html')
+    return render_template('login.html')
 
 @app.route('/admin')
 @app.route('/inputUser')

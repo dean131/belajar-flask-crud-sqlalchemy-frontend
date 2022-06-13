@@ -1,0 +1,60 @@
+{% extends 'mainLayout.html' %}
+
+{% block title %}
+<title>Login</title>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="card col-md-4 mt-5 mx-auto">
+        <div class="card-header">
+            <h1 class="card-title text-center">
+                LOGIN
+            </h1>
+        </div>
+        <div class="card-body">
+            <form id="form-login">
+                <div class="mb-3">
+                    <label for="inpEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="inpEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="inpPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="inpPassword1">
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn text-center btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    // $(document).ready(function() {
+    //     $('#form-login').submit(function() {
+    //         let valu1 = $(this).find('#inpEmail1').val();
+    //         let valu2 = $(this).find('#inpPassword1').val();
+
+            
+
+    //         $.ajax({
+    //             url: "belajar-flask-crud-sqlalchemy.herokuapp.com/login?email="+valu1+"&password="+valu2,
+    //             type: 'GET',
+    //             data: 'json',
+    //             success: function(data) {
+    //                 alert(data)
+    //             }
+    //         });
+    //     });
+
+    // });
+</script>
+{% endblock %}
